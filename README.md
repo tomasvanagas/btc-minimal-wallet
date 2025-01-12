@@ -1,23 +1,24 @@
 # BTC Minimal Wallet
 
-A minimalistic Bitcoin wallet implementation in a single Python file, designed to interact with an [Electrum server](https://electrum.org/#servers) for transaction broadcast and balance retrieval. This wallet supports **Testnet** by default but can be configured for Mainnet with minimal changes.
+A minimalistic Bitcoin wallet implementation in a single Python file, designed to interact with an [Electrum server](https://electrum.org) for transaction broadcast and balance retrieval. This wallet supports **Testnet** by default but can be configured for Mainnet with minimal changes.
 
 ## Table of Contents
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Check Wallet Info](#check-wallet-info)
-  - [Send BTC](#send-btc)
-  - [Send All BTC](#send-all-btc)
-  - [List UTXOs](#list-utxos)
-- [Configuration](#configuration)
-- [How It Works](#how-it-works)
-- [License](#license)
+- [1. Features](#1-features)
+- [2. Installation](#2-installation)
+- [3. Configuration](#3-configuration)
+- [4. Usage](#4-usage)
+  - [4.1 Check Wallet Info](#41-check-wallet-info)
+  - [4.2 Send BTC](#42-send-btc)
+  - [4.3 Send All BTC](#43-send-all-btc)
+  - [4.4 List UTXOs](#44-list-utxos)
+- [5. How It Works](#5-how-it-works)
+- [6. License](#6-license)
 
 ---
+<br/><br/>
 
-## Features
+## 1. Features
 
 - **Single File**: Everything lives in `btc.py`.
 - **Bech32 (Native SegWit) Support**: Automatically creates and handles bech32 (`bc1...` / `tb1...`) addresses.
@@ -26,8 +27,9 @@ A minimalistic Bitcoin wallet implementation in a single Python file, designed t
 - **Supports Testnet** by default (easy to switch to Mainnet).
 
 ---
+<br/><br/>
 
-## Installation
+## 2. Installation
 
 1. **Clone the Repo**:
 
@@ -42,20 +44,18 @@ A minimalistic Bitcoin wallet implementation in a single Python file, designed t
    pip3 install bitcoinlib bech32
    ```
 
-   > _Note_: This wallet also uses Python's standard library modules (`ssl`, `socket`, `json`, `hashlib`, `sys`).  
-   > If you face any issues, ensure you have Python 3.7+ installed.
-
 3. **Run the Script**:
 
    ```bash
    python3 btc.py
    ```
 
-   You will see wallet information if you have the correct configuration, or usage instructions otherwise.
+   You will see wallet address and balance and usage instructions.
 
 ---
+<br/><br/>
 
-## Configuration
+## 3. Configuration
 
 Inside `btc.py`, you can edit the following variables in the `__main__` section (end of the file) to suit your needs:
 
@@ -72,12 +72,13 @@ private_key_hex = '0000000000000000000000000000000000000000000000000000000000000
 > **IMPORTANT**: Protect your private key! Anyone with access to this hex string can spend your BTC.
 
 ---
+<br/><br/>
 
-## Usage
+## 4. Usage
 
 All interactions happen through the command line interface of `btc.py`.
 
-### Check Wallet Info
+### 4.1. Check Wallet Info
 
 ```bash
 python3 btc.py
@@ -90,7 +91,7 @@ This command (with no arguments) displays:
 - Confirmed balance  
 - Basic usage instructions
 
-### Send BTC
+### 4.2. Send BTC
 
 ```bash
 python3 btc.py --send <to_address> <amount>
@@ -106,7 +107,7 @@ python3 btc.py --send <to_address> <amount>
   
   Returns a transaction ID if successful.
 
-### Send All BTC
+### 4.3. Send All BTC
 
 ```bash
 python3 btc.py --send-all <to_address>
@@ -120,7 +121,7 @@ python3 btc.py --send-all <to_address>
   python3 btc.py --send-all tb1qrecipientaddress
   ```
 
-### List UTXOs
+### 4.4. List UTXOs
 
 ```bash
 python3 btc.py --utxos
@@ -129,15 +130,16 @@ python3 btc.py --utxos
 Shows all unspent transaction outputs (UTXOs) associated with your wallet’s address in a JSON format.
 
 ---
+<br/><br/>
 
-## How It Works
+## 5. How It Works
 
 1. **Key & Address**:  
    - Uses `bitcoinlib.keys.HDKey` to handle a private key and derive its public key.  
    - Constructs a Native SegWit (Bech32) address from the public key hash.
 
 2. **Electrum JSON-RPC**:  
-   - The wallet opens a secure SSL socket to an Electrum server.  
+   - The wallet opens a connection to an Electrum server.  
    - Balance, UTXOs, and transaction broadcasting are managed with JSON-RPC calls.
 
 3. **Transaction Creation & Signing**:  
@@ -151,13 +153,11 @@ Shows all unspent transaction outputs (UTXOs) associated with your wallet’s ad
    - Default rate is 10 sat/byte (adjust as needed).
 
 ---
+<br/><br/>
 
-## License
+## 6. License
 
 This project is licensed under the [MIT License](LICENSE).  
 
 Feel free to use, modify, and distribute as you see fit.
 
----
-
-**Disclaimer**: This software is intended for educational and experimental purposes. Always exercise caution and test thoroughly (e.g., on Testnet) before transacting real BTC. 
