@@ -2,6 +2,12 @@
 
 A minimalistic Bitcoin wallet implementation in a single Python file, designed to interact with an [Electrum server](https://electrum.org) for transaction broadcast and balance retrieval. This wallet supports **Testnet** by default but can be configured for Mainnet with minimal changes.
 
+<br/>
+
+<img width="632" alt="Screenshot 2025-05-05 at 01 59 00" src="https://github.com/user-attachments/assets/ddc74d97-e428-48ef-a866-7e4f97bb5889" />
+
+<br/><br/>
+
 ## Table of Contents
 
 - [1. Features](#1-features)
